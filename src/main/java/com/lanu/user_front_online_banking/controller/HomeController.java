@@ -27,7 +27,7 @@ public class HomeController {
 
     @PostMapping("/signup")
     public String signupPost(@ModelAttribute("user") User user, Model model){
-
+        return "signup";
     }
 }
 
