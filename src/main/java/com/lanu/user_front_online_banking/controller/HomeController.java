@@ -46,7 +46,8 @@ public class HomeController {
                 model.addAttribute("usernameExists", true);
             }
             return "signup";
-        } else {
+        }
+        else {
             //Set<UserRole> userRoles = new HashSet<>();
             //userRoles.add(new UserRole(user, roleDao.findByName("ROLE_USER")));
 

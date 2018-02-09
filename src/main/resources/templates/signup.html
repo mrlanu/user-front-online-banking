@@ -49,7 +49,7 @@
 
                     <div class="form-group">
                         <label for="email" class="cols-sm-2 control-label">Your Email</label>
-                        <span class="bg-danger pull-right" th:if="${emailExists}">Email already exists</span>
+                        <span class="text-danger" th:if="${emailExists}"> <b>already exists</b></span>
                         <div class="input-group mb-3">
                             <div class="input-group-prepend">
                                 <span class="input-group-text"><i class="fa fa-envelope fa"></i></span>
@@ -61,7 +61,7 @@
 
                     <div class="form-group">
                         <label for="username" class="cols-sm-2 control-label">Username</label>
-                        <span class="bg-danger pull-right" th:if="${usernameExists}">Username already exists</span>
+                        <span class="text-danger" th:if="${usernameExists}"> <b>already exists</b></span>
                         <div class="input-group mb-3">
                             <div class="input-group-prepend">
                                 <span class="input-group-text"><i class="fab fa-themeisle"></i></span>
