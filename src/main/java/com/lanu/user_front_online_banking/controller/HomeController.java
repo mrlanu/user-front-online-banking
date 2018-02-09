@@ -1,6 +1,8 @@
 package com.lanu.user_front_online_banking.controller;
 
+import com.lanu.user_front_online_banking.dao.RoleDao;
 import com.lanu.user_front_online_banking.domain.User;
+import com.lanu.user_front_online_banking.domain.security.UserRole;
 import com.lanu.user_front_online_banking.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,6 +17,9 @@ public class HomeController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private RoleDao roleDao;
 
     @RequestMapping("/")
     public String home(){
@@ -50,8 +55,9 @@ public class HomeController {
         else {
             //Set<UserRole> userRoles = new HashSet<>();
             //userRoles.add(new UserRole(user, roleDao.findByName("ROLE_USER")));
-
-            userService.save(user);
+            Set<UserRole> userRoles = new HashSet<>();
+            userRoles.add(new UserRole(user, roleDao.findByName("ROLE_USER")));
+            userService.createUser(user, userRoles);
 
             return "redirect:/";
         }

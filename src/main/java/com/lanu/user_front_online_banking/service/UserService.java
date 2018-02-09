@@ -1,17 +1,23 @@
 package com.lanu.user_front_online_banking.service;
 
 import com.lanu.user_front_online_banking.domain.User;
+import com.lanu.user_front_online_banking.domain.security.UserRole;
+
+import java.util.Set;
+
 
 public interface UserService {
-    public void save(User user);
+    void save(User user);
 
-    public User findByUsername(String username);
+    User createUser(User user, Set<UserRole> userRoles);
 
-    public User findByEmail(String email);
+    User findByUsername(String username);
 
-    public boolean checkUserExists(String username, String email);
+    User findByEmail(String email);
 
-    public boolean checkUsernameExists(String username);
+    boolean checkUserExists(String username, String email);
 
-    public boolean checkEmailExists(String email);
+    boolean checkUsernameExists(String username);
+
+    boolean checkEmailExists(String email);
 }
