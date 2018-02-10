@@ -1,6 +1,8 @@
 package com.lanu.user_front_online_banking.controller;
 
 import com.lanu.user_front_online_banking.dao.RoleDao;
+import com.lanu.user_front_online_banking.domain.PrimaryAccount;
+import com.lanu.user_front_online_banking.domain.SavingsAccount;
 import com.lanu.user_front_online_banking.domain.User;
 import com.lanu.user_front_online_banking.domain.security.UserRole;
 import com.lanu.user_front_online_banking.service.UserService;
@@ -9,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -63,7 +66,13 @@ public class HomeController {
     }
 
     @RequestMapping("/userFront")
-    public String userFront(){
+    public String userFront(Principal principal, Model model){
+        User user = userService.findByUsername(principal.getName());
+        PrimaryAccount primaryAccount = user.getPrimaryAccount();
+        SavingsAccount savingsAccount = user.getSavingsAccount();
+
+        model.addAttribute("primaryAccount", primaryAccount);
+        model.addAttribute("savingsAccount", savingsAccount);
         return "userFront";
     }
 }

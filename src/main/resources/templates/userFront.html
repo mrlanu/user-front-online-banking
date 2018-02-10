@@ -3,5 +3,73 @@
 <head th:replace="common/header :: common-header"/>
 <body>
 <div th:replace="common/header :: navbar"/>
+<br/>
+<div class="container">
+    <div class="row">
+            <div class="col-sm-4">
+                <div class="card card-inverse" style="background-color: white; border-color: #333;">
+                    <div class="card-block">
+                        <div class="container">
+                        <p><h3 class="card-title">Primary balance:</h3></p>
+                            <div class="col-xs-6 text-right">
+                                <h1><i class="fas fa-dollar-sign"></i><span th:text="${primaryAccount.accountBalance}">...</span></h1>
+                            </div>
+                            <p><a href="#" class="btn btn-primary" >View details</a></p>
+                        </div>
+                    </div>
+                </div>
+
+                <br/>
+
+                    <div class="card card-inverse" style="background-color: white; border-color: #333;">
+                        <div class="card-block">
+                            <div class="container">
+                                <p><h3 class="card-title">Savings balance:</h3></p>
+                                <div class="col-xs-6 text-right">
+                                    <h1><i class="fas fa-dollar-sign"></i><span th:text="${savingsAccount.accountBalance}">...</span></h1>
+                                </div>
+                                <p><a href="#" class="btn btn-primary" >View details</a></p>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+
+        <div class="col-sm-1"></div>
+
+        <div class="col-sm-3">
+
+            <div class="card card-inverse" style="background-color: white; border-color: #333;">
+                <div class="card-block">
+                    <div class="container">
+                        <p><h3 class="card-title">Deposite</h3></p>
+                        <div class="col-xs-6 text-right">
+                            <h1><i class="far fa-credit-card"></i></h1>
+                        </div>
+                        <p><a href="#" class="btn btn-primary" >Go to...</a></p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="col-sm-1"></div>
+
+        <div class="col-sm-3">
+            <div class="card card-inverse" style="background-color: white; border-color: #333;">
+                <div class="card-block">
+                    <div class="container">
+                        <p><h3 class="card-title">Withdraw</h3></p>
+                        <div class="col-xs-6 text-right">
+                            <h1><i class="far fa-money-bill-alt"></i></h1>
+                        </div>
+                        <p><a href="#" class="btn btn-primary" >Go to...</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
 <div th:replace="common/header :: body-bottom-scripts"/>
+
 </body>
