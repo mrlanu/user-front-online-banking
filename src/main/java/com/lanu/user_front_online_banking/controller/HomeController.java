@@ -61,6 +61,11 @@ public class HomeController {
             return "redirect:/";
         }
     }
+
+    @RequestMapping("/userFront")
+    public String userFront(){
+        return "userFront";
+    }
 }
 
 
