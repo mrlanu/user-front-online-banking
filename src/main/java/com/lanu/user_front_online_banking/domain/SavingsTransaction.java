@@ -8,7 +8,7 @@ import java.util.Date;
 public class SavingsTransaction {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private Date date;
     private String description;
