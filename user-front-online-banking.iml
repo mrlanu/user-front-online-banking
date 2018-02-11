@@ -115,5 +115,6 @@
     <orderEntry type="library" name="Maven: org.webjars:jquery:3.2.1" level="project" />
     <orderEntry type="library" name="Maven: org.webjars.npm:popper.js:1.12.9" level="project" />
     <orderEntry type="library" name="Maven: org.webjars:font-awesome:5.0.6" level="project" />
+    <orderEntry type="library" name="Maven: org.webjars:datatables:1.10.16" level="project" />
   </component>
 </module>

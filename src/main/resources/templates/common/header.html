@@ -6,7 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="webjars/bootstrap/4.0.0/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="/webjars/bootstrap/4.0.0/css/bootstrap.min.css"/>
+    <link href="/webjars/bootstrap/4.0.0/css/jquery.dataTable.min.css" rel="stylesheet" />
+    <link href="/webjars/bootstrap/4.0.0/css/dataTables.bootstrap.min.css" rel="stylesheet" />
+    <link href="/webjars/datatables/1.10.16/css/dataTables.bootstrap.min.css" rel="stylesheet" />
+    <link href="/webjars/datatables/1.10.16/css/jquery.dataTables.min.css" rel="stylesheet" />
 
     <title>User front</title>
 </head>
@@ -15,7 +19,7 @@
 <div th:fragment="navbar">
     <div class="container">
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-            <a class="navbar-brand" href="#">Lanu inc.</a>
+            <a class="navbar-brand" th:href="@{/userFront}">Lanu inc.</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample05" aria-controls="navbarsExample05" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -25,8 +29,8 @@
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Accounts</a>
                         <div class="dropdown-menu" aria-labelledby="dropdown05">
-                            <a class="dropdown-item" href="#">Primary</a>
-                            <a class="dropdown-item" href="#">Savings</a>
+                            <a class="dropdown-item" th:href="@{/account/primaryAccount}">Primary</a>
+                            <a class="dropdown-item" th:href="@{/account/savingsAccount}">Savings</a>
 
                         </div>
                     </li>
@@ -67,10 +71,12 @@
 <div th:fragment="body-bottom-scripts">
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script type="text/javascript" src="webjars/jquery/3.2.1/jquery.min.js"></script>
-    <script type="text/javascript" src="webjars/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="webjars/popper.js/1.12.9/dist/umd/popper.min.js"></script>
-    <script type="text/javascript" src="webjars/font-awesome/5.0.6/svg-with-js/js/fontawesome-all.js"></script>
+    <script type="text/javascript" src="/webjars/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript" src="/webjars/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/webjars/popper.js/1.12.9/dist/umd/popper.min.js"></script>
+    <script type="text/javascript" src="/webjars/font-awesome/5.0.6/svg-with-js/js/fontawesome-all.js"></script>
+    <script type="text/javascript" src="/webjars/datatables/1.10.16/js/dataTables.bootstrap.min.js"></script>
+    <script type="text/javascript" src="/webjars/datatables/1.10.16/js/jquery.dataTables.min.js"></script>
     <script src="/js/main.js"></script>
 </div>
 </body>

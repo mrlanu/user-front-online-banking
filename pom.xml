@@ -96,6 +96,14 @@
 			<version>5.0.6</version>
 		</dependency>
 
+		<!-- https://mvnrepository.com/artifact/org.webjars/datatables -->
+		<dependency>
+			<groupId>org.webjars</groupId>
+			<artifactId>datatables</artifactId>
+			<version>1.10.16</version>
+		</dependency>
+
+
 	</dependencies>
 
 	<build>
