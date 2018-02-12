@@ -1,8 +1,6 @@
 package com.lanu.user_front_online_banking.controller;
 
-import com.lanu.user_front_online_banking.domain.PrimaryAccount;
-import com.lanu.user_front_online_banking.domain.SavingsAccount;
-import com.lanu.user_front_online_banking.domain.User;
+import com.lanu.user_front_online_banking.domain.*;
 import com.lanu.user_front_online_banking.service.AccountService;
 import com.lanu.user_front_online_banking.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
+import java.util.List;
 
 @Controller
 @RequestMapping("/account")
@@ -26,7 +25,9 @@ public class AccountController {
     public String primaryAccount(Principal principal, Model model){
         User user = userService.findByUsername(principal.getName());
         PrimaryAccount primaryAccount = user.getPrimaryAccount();
+        List<PrimaryTransaction> primaryTransactionList = primaryAccount.getPrimaryTransactionList();
         model.addAttribute("primaryAccount", primaryAccount);
+        model.addAttribute("primaryTransactionList", primaryTransactionList);
         return "primaryAccount";
     }
 
@@ -34,7 +35,9 @@ public class AccountController {
     public String primarysavingsaccountAccount(Principal principal, Model model){
         User user = userService.findByUsername(principal.getName());
         SavingsAccount savingsAccount = user.getSavingsAccount();
+        List<SavingsTransaction> savingsTransactionList = savingsAccount.getSavingsTransactionList();
         model.addAttribute("savingsAccount", savingsAccount);
+        model.addAttribute("savingsTransactionList", savingsTransactionList);
         return "savingsAccount";
     }
 
