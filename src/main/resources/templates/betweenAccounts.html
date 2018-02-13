@@ -7,10 +7,17 @@
     <div class="row">
         <div class="col-md-6">
             <br/>
-            <form th:action="@{/account/withdraw}" method="post">
+            <form th:action="@{/transfer/betweenAccounts}" method="post">
                 <div class="form-group" >
-                    <label for="accountType">1. Please select the account you would like to withdraw:</label>
-                    <select class="form-control" th:value="${accountType}" name="accountType" id="accountType" required="required">
+                    <label for="transferFrom">1. Please select the account you would like to transfer From:</label>
+                    <select class="form-control" th:value="${transferFrom}" name="transferFrom" id="transferFrom" required="required">
+                        <option disabled="disabled" selected="selected"> -- select your account -- </option>
+                        <option>Primary</option>
+                        <option>Savings</option>
+                    </select>
+                    <br />
+                    <label for="transferTo">2. Please select the account you would like to transfer To</label>
+                    <select class="form-control" th:value="${transferTo}" name="transferTo" id="transferTo" required="required">
                         <option disabled="disabled" selected="selected"> -- select your account -- </option>
                         <option>Primary</option>
                         <option>Savings</option>
@@ -19,7 +26,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label>2. Please specify the amount you would like to withdraw: </label>
+                    <label>3. Please specify the amount you would like to deposit: </label>
                     <span class="input-group-addon">Amount $</span>
                     <input th:value="${amount}" type="text" name="amount" id="amount" class="form-control" aria-label="Amount (to the nearest dollar)"/>
                 </div>
@@ -28,7 +35,7 @@
                        name="${_csrf.parameterName}"
                        value="${_csrf.token}"/>
 
-                <button class="btn btn-lg btn-primary btn-block" type="submit">Withdraw</button>
+                <button class="btn btn-lg btn-primary btn-block" type="submit">Transfer</button>
             </form>
 
             <div class="col-md-6">

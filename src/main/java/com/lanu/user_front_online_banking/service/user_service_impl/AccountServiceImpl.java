@@ -6,6 +6,7 @@ import com.lanu.user_front_online_banking.dao.SavingsAccountDao;
 import com.lanu.user_front_online_banking.dao.SavingsTransactionDao;
 import com.lanu.user_front_online_banking.domain.*;
 import com.lanu.user_front_online_banking.service.AccountService;
+import com.lanu.user_front_online_banking.service.TransactionService;
 import com.lanu.user_front_online_banking.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -29,10 +30,7 @@ public class AccountServiceImpl implements AccountService {
     private UserService userService;
 
     @Autowired
-    private SavingsTransactionDao savingsTransactionDao;
-
-    @Autowired
-    private PrimaryTransactionDao primaryTransactionDao;
+    private TransactionService transactionService;
 
     @Override
     public PrimaryAccount createPrimaryAccount() {
@@ -61,7 +59,7 @@ public class AccountServiceImpl implements AccountService {
             Date date = new Date();
             PrimaryTransaction primaryTransaction = new PrimaryTransaction
                     (date, "Deposit to Primary Account", "Account", "Finished", amount, primaryAccount.getAccountBalance(), primaryAccount);
-            primaryTransactionDao.save(primaryTransaction);
+            transactionService.savePrimaryDepositTransaction(primaryTransaction);
         }else if (accountType.equalsIgnoreCase("Savings")){
             SavingsAccount savingsAccount = user.getSavingsAccount();
             savingsAccount.setAccountBalance(savingsAccount.getAccountBalance().add(new BigDecimal(amount)));
@@ -69,7 +67,7 @@ public class AccountServiceImpl implements AccountService {
             Date date = new Date();
             SavingsTransaction savingsTransaction = new SavingsTransaction
                     (date, "Deposit to savings Account", "Account", "Finished", amount, savingsAccount.getAccountBalance(), savingsAccount);
-            savingsTransactionDao.save(savingsTransaction);
+            transactionService.saveSavingsDepositTransaction(savingsTransaction);
         }
     }
 
@@ -83,7 +81,7 @@ public class AccountServiceImpl implements AccountService {
             Date date = new Date();
             PrimaryTransaction primaryTransaction = new PrimaryTransaction
                     (date, "Withdraw to Primary Account", "Account", "Finished", amount, primaryAccount.getAccountBalance(), primaryAccount);
-            primaryTransactionDao.save(primaryTransaction);
+            transactionService.savePrimaryWithdrawTransaction(primaryTransaction);
         }else if (accountType.equalsIgnoreCase("Savings")){
             SavingsAccount savingsAccount = user.getSavingsAccount();
             savingsAccount.setAccountBalance(savingsAccount.getAccountBalance().subtract(new BigDecimal(amount)));
@@ -91,7 +89,7 @@ public class AccountServiceImpl implements AccountService {
             Date date = new Date();
             SavingsTransaction savingsTransaction = new SavingsTransaction
                     (date, "Withdraw to savings Account", "Account", "Finished", amount, savingsAccount.getAccountBalance(), savingsAccount);
-            savingsTransactionDao.save(savingsTransaction);
+            transactionService.saveSavingsWithdrawTransaction(savingsTransaction);
         }
     }
 
