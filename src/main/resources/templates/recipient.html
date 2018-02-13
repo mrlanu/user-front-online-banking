@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:replace="common/header :: common-header"/>
+
+<body>
+<head th:replace="common/header :: navbar"/>
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <br/>
+          <form class="form-horizontal" th:action="@{/transfer/recipient}" method="post">
+              <div class="form-group">
+                  <label for="recipientName" class="cols-sm-2 control-label">Name:</label>
+                  <input type="text" class="form-control" th:value="${recipient.name}" id="recipientName"
+                  name="recipientName" placeholder="Enter name" autofocus="autofocus"/>
+              </div>
+
+              <div class="form-group">
+                  <label for="recipientEmail" class="cols-sm-2 control-label">Email:</label>
+                  <input type="text" class="form-control" th:value="${recipient.name}" id="recipientEmail"
+                         name="recipientEmail" placeholder="Enter email "/>
+              </div>
+
+              <div class="form-group">
+                  <label for="recipientPhone" class="cols-sm-2 control-label">Phone:</label>
+                  <input type="text" class="form-control" th:value="${recipient.phone}" id="recipientPhone"
+                         name="recipientPhone" placeholder="Enter phone"/>
+              </div>
+
+              <div class="form-group">
+                  <label for="recipientAccNumber" class="cols-sm-2 control-label">Account number:</label>
+                  <input type="text" class="form-control" th:value="${recipient.accountNumber}" id="recipientAccNumber"
+                         name="recipientAccNumber" placeholder="Enter account number"/>
+              </div>
+
+              <div class="form-group">
+                  <label for="recipientDescription" class="cols-sm-2 control-label">Phone:</label>
+                  <input type="text" class="form-control" th:value="${recipient.description}" id="recipientDescription"
+                         name="recipientDescription" placeholder="Enter description"/>
+              </div>
+
+              <input type="hidden"
+                     name="${_csrf.parameterName}"
+                     value="${_csrf.token}"/>
+
+              <div class="form-group ">
+                  <button type="submit" class="btn btn-primary btn-sm btn-block login-button">Add</button>
+              </div>
+
+              <div class="form-group ">
+                  <a  class="btn btn-info btn-sm btn-block login-button" th:href="@{/}">Cancel</a>
+              </div>
+          </form>
+        </div>
+    </div>
+</div>
+
+
+<div th:replace="common/header :: body-bottom-scripts"/>
+</body>
+</html>

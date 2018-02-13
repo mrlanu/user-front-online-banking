@@ -1,9 +1,6 @@
 package com.lanu.user_front_online_banking.controller;
 
-import com.lanu.user_front_online_banking.domain.PrimaryAccount;
-import com.lanu.user_front_online_banking.domain.SavingsAccount;
-import com.lanu.user_front_online_banking.domain.SavingsTransaction;
-import com.lanu.user_front_online_banking.domain.User;
+import com.lanu.user_front_online_banking.domain.*;
 import com.lanu.user_front_online_banking.service.TransactionService;
 import com.lanu.user_front_online_banking.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.security.Principal;
+import java.util.List;
 
 @Controller
 @RequestMapping("/transfer")
@@ -47,5 +45,15 @@ public class TransferController {
         transactionService.betweenAccountsTransfer(transferFrom, transferTo, amount, primaryAccount, savingsAccount);
 
         return "redirect:/userFront";
+    }
+
+    @GetMapping("/recipient")
+    public String recipient(Model model, Principal principal){
+        Recipient recipient = new Recipient();
+        User user = userService.findByUsername(principal.getName());
+        List<Recipient> recipientList = user.getRecipientList();
+        model.addAttribute("recipient", recipient);
+        model.addAttribute("recipientList", recipientList);
+        return "recipient";
     }
 }
