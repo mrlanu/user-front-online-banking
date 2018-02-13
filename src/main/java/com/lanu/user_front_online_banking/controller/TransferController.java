@@ -2,6 +2,7 @@ package com.lanu.user_front_online_banking.controller;
 
 import com.lanu.user_front_online_banking.dao.RecipientDao;
 import com.lanu.user_front_online_banking.domain.*;
+import com.lanu.user_front_online_banking.service.RecipientService;
 import com.lanu.user_front_online_banking.service.TransactionService;
 import com.lanu.user_front_online_banking.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +25,7 @@ public class TransferController {
     private TransactionService transactionService;
 
     @Autowired
-    private RecipientDao recipientDao;
+    private RecipientService recipientService;
 
     @GetMapping("/betweenAccounts")
     public String betweenAccounts(Model model){
@@ -70,12 +71,12 @@ public class TransferController {
     @GetMapping("/recipient/edit")
     @ResponseBody
     public Optional<Recipient> findOne(Long id) {
-        return recipientDao.findById(id);
+        return recipientService.findById(id);
     }
 
     @GetMapping("/recipient/delete")
     public String deleterecipient(Long id) {
-        recipientDao.deleteById(id);
+        recipientService.deleteById(id);
         return "redirect:/transfer/recipient";
     }
 
