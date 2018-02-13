@@ -1,18 +1,17 @@
 package com.lanu.user_front_online_banking.controller;
 
+import com.lanu.user_front_online_banking.dao.RecipientDao;
 import com.lanu.user_front_online_banking.domain.*;
 import com.lanu.user_front_online_banking.service.TransactionService;
 import com.lanu.user_front_online_banking.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/transfer")
@@ -23,6 +22,9 @@ public class TransferController {
 
     @Autowired
     private TransactionService transactionService;
+
+    @Autowired
+    private RecipientDao recipientDao;
 
     @GetMapping("/betweenAccounts")
     public String betweenAccounts(Model model){
@@ -56,4 +58,25 @@ public class TransferController {
         model.addAttribute("recipientList", recipientList);
         return "recipient";
     }
+
+    @PostMapping("/recipient/save")
+    public String recipientSave(@ModelAttribute("recipient") Recipient recipient, Principal principal){
+        User user = userService.findByUsername(principal.getName());
+        recipient.setUser(user);
+        transactionService.saveRecipient(recipient);
+        return "redirect:/transfer/recipient";
+    }
+
+    @GetMapping("/recipient/edit")
+    @ResponseBody
+    public Optional<Recipient> findOne(Long id) {
+        return recipientDao.findById(id);
+    }
+
+    @GetMapping("/recipient/delete")
+    public String deleterecipient(Long id) {
+        recipientDao.deleteById(id);
+        return "redirect:/transfer/recipient";
+    }
+
 }

@@ -1,13 +1,7 @@
 package com.lanu.user_front_online_banking.service.user_service_impl;
 
-import com.lanu.user_front_online_banking.dao.PrimaryAccountDao;
-import com.lanu.user_front_online_banking.dao.PrimaryTransactionDao;
-import com.lanu.user_front_online_banking.dao.SavingsAccountDao;
-import com.lanu.user_front_online_banking.dao.SavingsTransactionDao;
-import com.lanu.user_front_online_banking.domain.PrimaryAccount;
-import com.lanu.user_front_online_banking.domain.PrimaryTransaction;
-import com.lanu.user_front_online_banking.domain.SavingsAccount;
-import com.lanu.user_front_online_banking.domain.SavingsTransaction;
+import com.lanu.user_front_online_banking.dao.*;
+import com.lanu.user_front_online_banking.domain.*;
 import com.lanu.user_front_online_banking.service.AccountService;
 import com.lanu.user_front_online_banking.service.TransactionService;
 import com.lanu.user_front_online_banking.service.UserService;
@@ -37,6 +31,9 @@ public class TransactionServiceImpl implements TransactionService{
 
     @Autowired
     private SavingsAccountDao savingsAccountDao;
+
+    @Autowired
+    private RecipientDao recipientDao;
 
     @Override
     public List<PrimaryTransaction> findPrimaryTransactionList(String username) {
@@ -98,5 +95,10 @@ public class TransactionServiceImpl implements TransactionService{
         } else {
             throw new Exception("Invalid Transfer");
         }
+    }
+
+    @Override
+    public void saveRecipient(Recipient recipient) {
+        recipientDao.save(recipient);
     }
 }

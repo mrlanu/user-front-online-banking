@@ -1,9 +1,6 @@
 package com.lanu.user_front_online_banking.service;
 
-import com.lanu.user_front_online_banking.domain.PrimaryAccount;
-import com.lanu.user_front_online_banking.domain.PrimaryTransaction;
-import com.lanu.user_front_online_banking.domain.SavingsAccount;
-import com.lanu.user_front_online_banking.domain.SavingsTransaction;
+import com.lanu.user_front_online_banking.domain.*;
 
 import java.util.List;
 
@@ -22,4 +19,5 @@ public interface TransactionService {
 
     void betweenAccountsTransfer(String transferFrom, String transferTo, String amount, PrimaryAccount primaryAccount, SavingsAccount savingsAccount) throws Exception;
 
+    void saveRecipient(Recipient recipient);
 }

@@ -4,58 +4,123 @@
 
 <body>
 <head th:replace="common/header :: navbar"/>
+<br/>
 <div class="container">
-    <div class="row">
-        <div class="col-md-6">
-            <br/>
-          <form class="form-horizontal" th:action="@{/transfer/recipient}" method="post">
-              <div class="form-group">
-                  <label for="recipientName" class="cols-sm-2 control-label">Name:</label>
-                  <input type="text" class="form-control" th:value="${recipient.name}" id="recipientName"
-                  name="recipientName" placeholder="Enter name" autofocus="autofocus"/>
-              </div>
+    <button class="btn btn-success nBtn">New Recipient</button>
+</div>
+<br/>
 
-              <div class="form-group">
-                  <label for="recipientEmail" class="cols-sm-2 control-label">Email:</label>
-                  <input type="text" class="form-control" th:value="${recipient.name}" id="recipientEmail"
-                         name="recipientEmail" placeholder="Enter email "/>
-              </div>
+<div class="container">
+    <table id="recipientList" class="table table-hover table-striped">
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>Account number</th>
+            <th>Description</th>
+            <th></th>
+            <th></th>
+        </tr>
 
-              <div class="form-group">
-                  <label for="recipientPhone" class="cols-sm-2 control-label">Phone:</label>
-                  <input type="text" class="form-control" th:value="${recipient.phone}" id="recipientPhone"
-                         name="recipientPhone" placeholder="Enter phone"/>
-              </div>
+        </thead>
+        <tbody>
+        <tr th:each="recipient :${recipientList}">
+            <td th:text="${recipient.name}"></td>
+            <td th:text="${recipient.email}"></td>
+            <td th:text="${recipient.phone}"></td>
+            <td th:text="${recipient.accountNumber}"></td>
+            <td th:text="${recipient.description}"></td>
+            <td><a th:href="@{/transfer/recipient/edit/(id=${recipient.id})}" class="btn btn-primary btn-sm eBtn">Edit</a></td>
+            <td><a th:href="@{/transfer/recipient/delete/(id=${recipient.id})}" class="btn btn-danger btn-sm delBtn">Delete</a></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
 
-              <div class="form-group">
-                  <label for="recipientAccNumber" class="cols-sm-2 control-label">Account number:</label>
-                  <input type="text" class="form-control" th:value="${recipient.accountNumber}" id="recipientAccNumber"
-                         name="recipientAccNumber" placeholder="Enter account number"/>
-              </div>
+<!--Modal Form -->
+<div class="myForm">
+    <form th:action="@{/transfer/recipient/save}" method="post">
+        <div class="modal fade" id="recipientModal" tabindex="-1" role="dialog" aria-labelledby="recipientModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="recipientModalLabel">New recipient</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
 
-              <div class="form-group">
-                  <label for="recipientDescription" class="cols-sm-2 control-label">Phone:</label>
-                  <input type="text" class="form-control" th:value="${recipient.description}" id="recipientDescription"
-                         name="recipientDescription" placeholder="Enter description"/>
-              </div>
+                            <div class="form-group">
+                                <label for="id" class="form-control-label" hidden="true">ID:</label>
+                                <input type="text" hidden="true" readonly="readonly" class="form-control" id="id" name="id" th:value="${recipient.id}"/>
+                            </div>
 
-              <input type="hidden"
-                     name="${_csrf.parameterName}"
-                     value="${_csrf.token}"/>
+                            <div class="form-group">
+                                <label for="name" class="form-control-label">Name:</label>
+                                <input type="text" class="form-control" id="name" name="name" th:value="${recipient.name}"/>
+                            </div>
 
-              <div class="form-group ">
-                  <button type="submit" class="btn btn-primary btn-sm btn-block login-button">Add</button>
-              </div>
+                            <div class="form-group">
+                                <label for="email" class="form-control-label">Email:</label>
+                                <input type="text" class="form-control" id="email" name="email" th:value="${recipient.email}"/>
+                            </div>
 
-              <div class="form-group ">
-                  <a  class="btn btn-info btn-sm btn-block login-button" th:href="@{/}">Cancel</a>
-              </div>
-          </form>
+                            <div class="form-group">
+                                <label for="phone" class="form-control-label">Phone:</label>
+                                <input type="text" class="form-control" id="phone" name="phone" th:value="${recipient.phone}"/>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="accountNumber" class="form-control-label">Account number:</label>
+                                <input type="text" class="form-control" id="accountNumber" name="accountNumber" th:value="${recipient.accountNumber}"/>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="description" class="form-control-label">Description:</label>
+                                <input type="text" class="form-control" id="description" name="description" th:value="${recipient.description}"/>
+                            </div>
+
+                            <input type="hidden"
+                                   name="${_csrf.parameterName}"
+                                   value="${_csrf.token}"/>
+
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <input type="submit" class="btn btn-primary" value="Save" />
+                    </div>
+                 </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+<!-- DELETE modal form -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Confirm</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p class="alert alert-danger">Are you sure you want to delete this recipient ?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <a href="" class="btn btn-danger" id="delRef">Delete</a>
+            </div>
         </div>
     </div>
 </div>
-
-
 <div th:replace="common/header :: body-bottom-scripts"/>
+<script>
+    $(document).ready(function() {
+        $('#recipientList').DataTable();
+    } );
+</script>
 </body>
 </html>
