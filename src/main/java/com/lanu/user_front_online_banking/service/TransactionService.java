@@ -2,6 +2,7 @@ package com.lanu.user_front_online_banking.service;
 
 import com.lanu.user_front_online_banking.domain.*;
 
+import java.security.Principal;
 import java.util.List;
 
 public interface TransactionService {
@@ -20,4 +21,10 @@ public interface TransactionService {
     void betweenAccountsTransfer(String transferFrom, String transferTo, String amount, PrimaryAccount primaryAccount, SavingsAccount savingsAccount) throws Exception;
 
     void saveRecipient(Recipient recipient);
+
+    List<Recipient> findRecipientList(Principal principal);
+
+    Recipient findRecipientByName(String recipientName);
+
+    void toSomeoneElseTransfer(Recipient recipient, String accountType, String amount, PrimaryAccount primaryAccount, SavingsAccount savingsAccount);
 }

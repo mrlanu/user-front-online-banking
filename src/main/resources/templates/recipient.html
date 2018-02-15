@@ -36,7 +36,7 @@
         </tr>
         </tbody>
     </table>
-</div>
+
 
 <!--Modal Form -->
 <div class="myForm">
@@ -79,7 +79,7 @@
 
                             <div class="form-group">
                                 <label for="description" class="form-control-label">Description:</label>
-                                <input type="text" class="form-control" id="description" name="description" th:value="${recipient.description}"/>
+                                <textarea type="text" class="form-control" id="description" name="description" th:value="${recipient.description}"></textarea>
                             </div>
 
                             <input type="hidden"
@@ -89,6 +89,7 @@
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                                 <input type="submit" class="btn btn-primary" value="Save" />
+                             </div>
                     </div>
                  </div>
             </div>
@@ -115,6 +116,7 @@
             </div>
         </div>
     </div>
+</div>
 </div>
 <div th:replace="common/header :: body-bottom-scripts"/>
 <script>

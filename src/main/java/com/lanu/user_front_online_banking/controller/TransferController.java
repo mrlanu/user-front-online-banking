@@ -80,4 +80,21 @@ public class TransferController {
         return "redirect:/transfer/recipient";
     }
 
+    @GetMapping("/toSomeoneElse")
+    public String toSomeoneElse(Model model, Principal principal){
+        List<Recipient> recipientList = transactionService.findRecipientList(principal);
+        model.addAttribute("recipientList", recipientList);
+        model.addAttribute("accountType","");
+        return "toSomeoneElse";
+    }
+
+    @PostMapping("/toSomeoneElse")
+    public String toSomeoneElsePost(@ModelAttribute("recipientName") String recipientName, @ModelAttribute("accountType") String accountType,
+                                    @ModelAttribute("amount") String amount, Principal principal){
+        User user = userService.findByUsername(principal.getName());
+        Recipient recipient = transactionService.findRecipientByName(recipientName);
+        transactionService.toSomeoneElseTransfer(recipient, accountType, amount, user.getPrimaryAccount(), user.getSavingsAccount());
+        return "redirect:/userFront";
+    }
+
 }
